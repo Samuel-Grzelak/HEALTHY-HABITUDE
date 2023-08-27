@@ -5,9 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build",
-    "build": "react-scripts build"
+    "start": "node index.js"
 
   },
   "keywords": [],
