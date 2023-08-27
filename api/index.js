@@ -8,6 +8,8 @@ import multer from "multer";
 const app = express();
 const PORT = process.env.PORT || 5000; // Set a default port if process.env.PORT is not defined
 
+
+
 app.use(express.json());
 app.use(cookieParser());
 const storage = multer.diskStorage({
@@ -29,6 +31,12 @@ app.post("/api/upload", upload.single("file"), function (req, res) {
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
+
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

@@ -3,11 +3,12 @@ import Edit from "../img/edit.png";
 import Delete from "../img/delete.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
-import axios from "axios";
 import moment from "moment";
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import DOMPurify from "dompurify";
+import {axiosInstance} from "../config.js";
+
 
 const Single = () => {
   const [post, setPost] = useState({});
@@ -22,7 +23,7 @@ const Single = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/posts/${postId}`);
+        const res = await axiosInstance.get(`/posts/${postId}`);
         setPost(res.data);
       } catch (err) {
         console.log(err);
@@ -33,7 +34,7 @@ const Single = () => {
 
   const handleDelete = async ()=>{
     try {
-      await axios.delete(`/posts/${postId}`);
+      await axiosInstance.delete(`/posts/${postId}`);
       navigate("/")
     } catch (err) {
       console.log(err);
